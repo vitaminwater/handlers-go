@@ -97,6 +97,12 @@ func (h *HandlerManager) Attach(fn HandlerFunc) {
 	h.AddOutChan(c)
 }
 
+func (h *HandlerManager) NewOutChan(size int) (outChan chan interface{}) {
+	outChan = make(chan interface{}, size)
+	h.AddOutChan(outChan)
+	return
+}
+
 func (h *HandlerManager) AddOutChan(outChan chan interface{}) {
 	h.ctrlChan <- &ctrlAddOutChan{outChan}
 }
