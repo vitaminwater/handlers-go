@@ -1,7 +1,5 @@
 package handlers
 
-import log "github.com/Sirupsen/logrus"
-
 /**
  * HandlerManagers are used to process incoming messages from rotone.
  * Simply presented, it is just a graph of conditionnal demultiplexers.
@@ -28,7 +26,6 @@ type ctrlAddOutChan struct {
 }
 
 func (ctrl *ctrlAddOutChan) exec(h *HandlerManager) {
-	log.Info("ctrlAddOutChan.exec")
 	h.outChans = append(h.outChans, ctrl.outChan)
 	if len(h.outChans) == 1 {
 		h.firstFn()
@@ -41,7 +38,6 @@ type ctrlRemoveOutChan struct {
 }
 
 func (ctrl *ctrlRemoveOutChan) exec(h *HandlerManager) {
-	log.Info("ctrlRemoveOutChan.exec")
 	for i, outChan := range h.outChans {
 		if outChan == ctrl.outChan {
 			if i < len(h.outChans)-1 {
